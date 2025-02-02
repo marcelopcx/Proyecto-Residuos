@@ -128,3 +128,30 @@ plt.xlabel('Predicción')
 plt.ylabel('Real')
 plt.title('Matriz de Confusión')
 plt.show()
+
+# ------------------------------------------------------------------
+# VISUALIZACIÓN DE LA EVOLUCIÓN DEL ENTRENAMIENTO
+# ------------------------------------------------------------------
+
+plt.figure(figsize=(12, 4))
+
+# Gráfica de precisión
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Precisión Entrenamiento')
+plt.plot(history.history['val_accuracy'], label='Precisión Validación')
+plt.xlabel('Época')
+plt.ylabel('Precisión')
+plt.legend()
+plt.title('Evolución de la Precisión')
+
+# Gráfica de pérdida
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Pérdida Entrenamiento')
+plt.plot(history.history['val_loss'], label='Pérdida Validación')
+plt.xlabel('Época')
+plt.ylabel('Pérdida')
+plt.legend()
+plt.title('Evolución de la Pérdida')
+
+plt.show()
+

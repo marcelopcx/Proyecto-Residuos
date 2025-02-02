@@ -65,3 +65,7 @@ if uploaded_file is not None:
 
     st.write(f"**Predicción:** {class_labels[predicted_class]}")
     st.write(f"**Confianza:** {confidence * 100:.2f}%")
+
+# (Opcional) Ajuste final de la interfaz: agregar mensaje informativo si no se sube imagen
+if uploaded_file is None:
+    st.info("Por favor, suba una imagen para clasificarla.")
