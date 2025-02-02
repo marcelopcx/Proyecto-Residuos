@@ -154,4 +154,3 @@ plt.legend()
 plt.title('Evolución de la Pérdida')
 
 plt.show()
-
