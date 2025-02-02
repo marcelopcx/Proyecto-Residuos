@@ -21,3 +21,10 @@ def load_model():
 
 # Se carga el modelo usando la función definida
 model = load_model()
+
+# ------------------------------------------------------------------
+# DEFINICIÓN DE LAS ETIQUETAS DE CLASE
+# ------------------------------------------------------------------
+
+# Asegurarse de que el orden coincida con el utilizado durante el entrenamiento
+class_labels = ['metalico', 'papel', 'plástico', 'vidrio']

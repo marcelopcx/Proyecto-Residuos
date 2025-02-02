@@ -60,3 +60,18 @@ validation_generator = validation_datagen.flow_from_directory(
     class_mode='categorical',
     shuffle=False
 )
+
+# ------------------------------------------------------------------
+# CONSTRUCCIÓN DEL MODELO USANDO TRANSFER LEARNING (MobileNetV2)
+# ------------------------------------------------------------------
+
+base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
+base_model.trainable = False
+
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dropout(0.3)(x)
+num_classes = train_generator.num_classes
+predictions = Dense(num_classes, activation='softmax')(x)
+
+model = Model(inputs=base_model.input, outputs=predictions)
