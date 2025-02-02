@@ -105,3 +105,26 @@ history = model.fit(
 
 model.save("waste_classifier_model.h5")
 print("Modelo guardado en 'waste_classifier_model.h5'.")
+
+# ------------------------------------------------------------------
+# EVALUACIÓN DEL MODELO
+# ------------------------------------------------------------------
+
+validation_generator.reset()
+preds = model.predict(validation_generator, steps=validation_steps)
+y_pred = np.argmax(preds, axis=1)
+y_true = validation_generator.classes
+
+# Obtener nombres de clase a partir del generador
+class_labels_train = list(validation_generator.class_indices.keys())
+
+report = classification_report(y_true, y_pred, target_names=class_labels_train)
+print("Reporte de Clasificación:\n", report)
+
+cm = confusion_matrix(y_true, y_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', xticklabels=class_labels_train, yticklabels=class_labels_train, cmap='Blues')
+plt.xlabel('Predicción')
+plt.ylabel('Real')
+plt.title('Matriz de Confusión')
+plt.show()
