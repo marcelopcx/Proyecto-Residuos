@@ -28,3 +28,12 @@ model = load_model()
 
 # Asegurarse de que el orden coincida con el utilizado durante el entrenamiento
 class_labels = ['metalico', 'papel', 'plástico', 'vidrio']
+
+# ------------------------------------------------------------------
+# INTERFAZ DE USUARIO CON STREAMLIT
+# ------------------------------------------------------------------
+
+st.title("Clasificador de Residuos")
+st.write("Suba una imagen y el sistema la clasificará.")
+
+uploaded_file = st.file_uploader("Elija una imagen...", type=["jpg", "jpeg", "png"])

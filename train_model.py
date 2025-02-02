@@ -75,3 +75,33 @@ num_classes = train_generator.num_classes
 predictions = Dense(num_classes, activation='softmax')(x)
 
 model = Model(inputs=base_model.input, outputs=predictions)
+
+# ------------------------------------------------------------------
+# COMPILACIÓN DEL MODELO
+# ------------------------------------------------------------------
+
+model.compile(optimizer=Adam(learning_rate=LEARNING_RATE),
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+steps_per_epoch = math.ceil(train_generator.samples / BATCH_SIZE)
+validation_steps = math.ceil(validation_generator.samples / BATCH_SIZE)
+
+# ------------------------------------------------------------------
+# ENTRENAMIENTO DEL MODELO
+# ------------------------------------------------------------------
+
+history = model.fit(
+    train_generator,
+    steps_per_epoch=steps_per_epoch,
+    epochs=EPOCHS,
+    validation_data=validation_generator,
+    validation_steps=validation_steps
+)
+
+# ------------------------------------------------------------------
+# GUARDADO DEL MODELO ENTRENADO
+# ------------------------------------------------------------------
+
+model.save("waste_classifier_model.h5")
+print("Modelo guardado en 'waste_classifier_model.h5'.")
