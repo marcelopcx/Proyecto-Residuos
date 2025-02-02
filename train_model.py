@@ -28,3 +28,35 @@ LEARNING_RATE = 1e-4
 
 TRAIN_DIR = "data/train"
 VALIDATION_DIR = "data/validation"
+
+# ------------------------------------------------------------------
+# PREPARACIÓN DE LOS DATOS CON AUMENTO Y PREPROCESAMIENTO
+# ------------------------------------------------------------------
+
+train_datagen = ImageDataGenerator(
+    preprocessing_function=preprocess_input,  # Preprocesa las imágenes según MobileNetV2
+    rotation_range=20,
+    zoom_range=0.15,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    horizontal_flip=True
+)
+
+validation_datagen = ImageDataGenerator(
+    preprocessing_function=preprocess_input
+)
+
+train_generator = train_datagen.flow_from_directory(
+    TRAIN_DIR,
+    target_size=IMAGE_SIZE,
+    batch_size=BATCH_SIZE,
+    class_mode='categorical'
+)
+
+validation_generator = validation_datagen.flow_from_directory(
+    VALIDATION_DIR,
+    target_size=IMAGE_SIZE,
+    batch_size=BATCH_SIZE,
+    class_mode='categorical',
+    shuffle=False
+)
